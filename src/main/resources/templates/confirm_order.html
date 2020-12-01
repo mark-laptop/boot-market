@@ -30,6 +30,11 @@
                                        th:placeholder="#{user.address}">
                             </div>
                             <div class="col form-group">
+                                <label th:text="#{order.recipient}"></label>
+                                <input name="recipient" type="text" class="form-control"
+                                       th:placeholder="#{order.recipient}">
+                            </div>
+                            <div class="col form-group">
                                 <label th:text="#{user.phone}"></label>
                                 <input th:field="*{phone}" type="text" class="form-control"
                                        th:placeholder="#{user.phone}">

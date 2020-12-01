@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Market</title>
+    <link rel="stylesheet" th:href="@{../static/css/stylesheet.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Orders)}"></div>
+
+    <h1>Market</h1>
+
+    <h3 th:text="#{nav.orders}"></h3>
+
+    <div th:if="${ordersPage.content.size() > 0}">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th th:text="#{order.id}"></th>
+                <th th:text="#{order.recipient}"></th>
+                <th th:text="#{order.address}"></th>
+                <th th:text="#{order.phone}"></th>
+                <th th:text="#{order.quantity}"></th>
+                <th th:text="#{order.sum}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${ordersPage.content}">
+                <td th:text="${order.id}"></td>
+                <td>
+                    <span style="font-weight: bold" th:text="${order.recipient}"></span>
+                </td>
+                <td>
+                    <span style="font-weight: bold" th:text="${order.address}"></span>
+                </td>
+                <td>
+                    <span style="font-weight: bold" th:text="${order.phone}"></span>
+                </td>
+                <td>
+                    <span style="font-weight: bold" th:text="${order.quantity}"></span>
+                </td>
+                <td>
+                    <span style="font-weight: bold" th:text="${order.sum}"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{'/?p='+ ${ordersPage.previousOrFirstPageable().getPageNumber() + 1}}"
+                       th:text="#{paging.prev}"></a>
+                    <!--                   th:href="@{'/?p='+ ${ordersPage.previousOrFirstPageable().getPageNumber() + 1} + ${filtersDef}}" th:text="#{paging.prev}"></a>-->
+                </li>
+                <li class="page-item" th:classappend="${ordersPage.getNumber() + 1 == i ? 'active' : ''}"
+                    th:each="i : ${#numbers.sequence(1, ordersPage.getTotalPages())}">
+                    <a class="page-link" th:text="${i}" th:href="@{'/?p=' + ${i}}"></a>
+                    <!--                <a class="page-link" th:text="${i}" th:href="@{'/?p=' + ${i} + ${filtersDef}}"></a>-->
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                       th:href="@{'/?p='+ ${ordersPage.nextOrLastPageable().getPageNumber() + 1}}"
+                       th:text="#{paging.next}"></a>
+                    <!--                   th:href="@{'/?p='+ ${ordersPage.nextOrLastPageable().getPageNumber() + 1} + ${filtersDef}}" th:text="#{paging.next}"></a>-->
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div th:if="${ordersPage.content.size() == 0}">
+        <span th:text="#{nav.order.empty}"></span>
+    </div>
+
+</body>
+</html>

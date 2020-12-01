@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ndg.market.model.Order;
+import ru.ndg.market.model.User;
 import ru.ndg.market.repository.OrderRepository;
 
 @Service
@@ -22,6 +23,13 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(readOnly = true)
     public Page<Order> getAllOrders(Integer page, Integer size) {
         return orderRepository.findAll(PageRequest.of(page, size));
+    }
+
+    @Override
+    public Page<Order> getAllOrdersByUser(User user, Integer page) {
+        if (page == null || page < 0) page = 0;
+        else page -= 1;
+        return orderRepository.findOrderByUserId(user.getId(), PageRequest.of(page, 5));
     }
 
     @Override

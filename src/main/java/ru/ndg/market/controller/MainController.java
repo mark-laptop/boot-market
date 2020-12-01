@@ -62,6 +62,17 @@ public class MainController {
         return "redirect:/login";
     }
 
+    @GetMapping(value = "/orders")
+    public String showOrdersPage(@RequestParam(name = "p", required = false) Integer page
+            , @RequestParam(required = false) Map<String, String> params
+            , Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("ordersPage", orderService.getAllOrdersByUser(user, page));
+        // TODO: 01.12.2020 Доработать фильтры на заказы
+//        model.addAttribute("filtersDef", params.get("filterOut"));
+        return "orders";
+    }
+
     @GetMapping(value = "/edit/{id}")
     public String showEditProductPage(@PathVariable(name = "id") Long id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
@@ -112,8 +123,11 @@ public class MainController {
     }
 
     @PostMapping(value = "/orders/save")
-    public String saveOrder(@RequestParam(name = "address") String address, @RequestParam(name = "phone") String phone, Principal principal) {
-        orderService.saveOrUpdateOrder(new Order(cart, userService.findByUsername(principal.getName()), address, phone));
+    public String saveOrder(@RequestParam(name = "address") String address
+            , @RequestParam(name = "phone") String phone
+            , @RequestParam(name = "recipient") String recipient
+            , Principal principal) {
+        orderService.saveOrUpdateOrder(new Order(cart, userService.findByUsername(principal.getName()), address, phone, recipient));
         return "redirect:/";
     }
 }

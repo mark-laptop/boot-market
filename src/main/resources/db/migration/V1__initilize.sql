@@ -9,13 +9,13 @@ CREATE TABLE user (
     email VARCHAR(255),
     address VARCHAR(255),
     phone VARCHAR(255)
-);
+)DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 # Таблица пользовательских ролей
 CREATE TABLE role (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL
-);
+)DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 # Таблица для привязка ролей к пользователям
 CREATE TABLE user_role (
@@ -24,25 +24,26 @@ CREATE TABLE user_role (
     role_id BIGINT,
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (role_id) REFERENCES role(id)
-);
+)DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 # Таблица продуктов
 CREATE TABLE product (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     price DECIMAL(15, 2) NOT NULL
-);
+)DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 # Таблица заказов
 CREATE TABLE orders (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     user_id BIGINT,
+    recipient VARCHAR(255),
     address VARCHAR(255),
     phone VARCHAR(255),
     quantity DECIMAL(15, 3),
     sum DECIMAL(15, 2),
     FOREIGN KEY (user_id) REFERENCES user(id)
-);
+)DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 # Таблица строк заказа
 CREATE TABLE order_item (
@@ -54,7 +55,7 @@ CREATE TABLE order_item (
     sum DECIMAL(15, 2),
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES product(id)
-);
+)DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO user (id, username, first_name, last_name, middle_name, password, email, address, phone)
 VALUES (1, 'user', 'Ivan', 'Ivanov', '', '$2y$12$f5Vl52H5rrbxa5XTNB6Xx.rvxkuIrkf4w6rKvqdpq0aFYNhk50z0O', 'ivan@mail.ru', 'Ленина 47', '89881231231'),

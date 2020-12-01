@@ -22,6 +22,9 @@
                 <li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${activeTab == 'Profile' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/profile}" th:text="#{nav.profile}"></a>
                 </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${activeTab == 'Orders' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/orders}" th:text="#{nav.orders}"></a>
+                </li>
                 <li class="nav-item" th:classappend="${activeTab == 'Cart' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/cart}" th:text="#{nav.cart}"></a>
                 </li>

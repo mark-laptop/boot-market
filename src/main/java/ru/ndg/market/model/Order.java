@@ -41,6 +41,9 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<OrderItem> orderItems = new HashSet<>();
 
+    @Column(name = "recipient")
+    private String recipient;
+
     @Column(name = "address")
     private String address;
 
@@ -53,7 +56,7 @@ public class Order {
     @Column(name = "sum")
     private BigDecimal sum;
 
-    public Order(Cart cart, User user, String address, String phone) {
+    public Order(Cart cart, User user, String address, String phone, String recipient) {
         this.user = user;
         if (address == null || address.isEmpty()) {
             this.address = user.getAddress();
@@ -65,6 +68,7 @@ public class Order {
         } else {
             this.phone = phone;
         }
+        this.recipient = recipient;
         this.sum = cart.getSum();
         addOrderItems(cart.getOrderItems());
         cart.clear();
