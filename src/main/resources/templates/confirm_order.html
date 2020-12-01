@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Market</title>
+    <link rel="stylesheet" th:href="@{../static/css/stylesheet.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="~{navigation :: navigation(Home)}"></div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <header class="card-header">
+                    <h4 class="card-title mt-2"><span th:text="#{nav.order.confirm}"></span></h4>
+                </header>
+                <article class="card-body">
+                    <form th:action="@{/orders/save}" th:object="${user}" method="POST">
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label th:text="#{user.address}"></label>
+                                <input th:field="*{address}" type="text" class="form-control"
+                                       th:placeholder="#{user.address}">
+                            </div>
+                            <div class="col form-group">
+                                <label th:text="#{user.phone}"></label>
+                                <input th:field="*{phone}" type="text" class="form-control"
+                                       th:placeholder="#{user.phone}">
+                            </div>
+                            <h4 class="card-title mt-2"><span th:text="#{nav.total} + ': ' + ${sum}"></span></h4>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block"
+                                    th:text="#{order.confirm.action}"></button>
+                        </div>
+                    </form>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

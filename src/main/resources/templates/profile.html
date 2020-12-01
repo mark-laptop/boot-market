@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Market</title>
+    <link rel="stylesheet" th:href="@{../static/css/stylesheet.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Profile)}"></div>
+
+    <h1 th:text="#{nav.profile}"></h1>
+
+    <h5 th:text="#{user.first.name} + ': ' + ${user.firstName}"></h5>
+    <h5 th:text="#{user.last.name} + ': ' + ${user.lastName}"></h5>
+    <h5 th:text="#{user.middle.name} + ': ' + ${user.middleName}"></h5>
+    <h5 th:text="#{user.email} + ': ' + ${user.email}"></h5>
+    <h5 th:text="#{user.address} + ': ' + ${user.address}"></h5>
+    <h5 th:text="#{user.phone} + ': ' + ${user.phone}"></h5>
+</div>
+
+</body>
+</html>

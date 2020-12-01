@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Market</title>
+    <link rel="stylesheet" th:href="@{../static/css/stylesheet.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Home)}"></div>
+
+    <h1 th:text="#{nav.order}"></h1>
+
+        <table class="table table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th th:text="#{products.name}"></th>
+                <th th:text="#{product.quantity}"></th>
+                <th th:text="#{products.price}"></th>
+                <th th:text="#{products.sum}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="orderItems : ${cart.orderItems}">
+                <td th:text="${orderItems.product.title}"></td>
+                <td th:text="${orderItems.quantity}"></td>
+                <td th:text="${orderItems.price}"></td>
+                <td th:text="${orderItems.sum}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <span th:text="#{nav.total} + ': ' + ${cart.sum}"></span>
+        <br>
+        <a class="btn btn-primary" th:href="@{/orders/confirm}" th:text="#{order.confirm}"></a>
+</div>
+
+</body>
+</html>
