@@ -83,7 +83,6 @@
 				<version>7.2.1</version>
 				<configuration>
 					<configFiles>src/main/resources/flyway.conf</configFiles>
-					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
