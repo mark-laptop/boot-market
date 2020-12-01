@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8"/>
@@ -57,7 +57,7 @@
             </td>
             <td th:text="${product.price}"></td>
             <td>
-                <a th:href="@{'/edit/' + ${product.id}}" class="btn btn-warning" th:text="#{products.edit}"></a>
+                <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" th:href="@{'/edit/' + ${product.id}}" class="btn btn-warning" th:text="#{products.edit}"></a>
                 <a th:href="@{'/cart/add/' + ${product.id}}" class="btn btn-primary" th:text="#{products.addToCart}"></a>
             </td>
         </tr>
