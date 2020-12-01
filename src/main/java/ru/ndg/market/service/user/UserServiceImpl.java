@@ -10,39 +10,39 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ndg.market.model.User;
 import ru.ndg.market.repository.UserRepository;
+import ru.ndg.market.service.role.RoleService;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleService roleService;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository
+                        , RoleService roleService
                         , BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public User loadByFirstName(String firstName) {
-        return userRepository.findByFirstName(firstName);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public User loadByUsername(String username) {
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
     @Transactional
-    public User saveUser(User user) {
+    public User saveNewUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.getRoles().add(roleService.findByName("ROLE_USER"));
         return userRepository.save(user);
     }
 

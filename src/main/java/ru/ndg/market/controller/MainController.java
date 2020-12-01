@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.ndg.market.bean.Cart;
 import ru.ndg.market.model.Order;
 import ru.ndg.market.model.Product;
+import ru.ndg.market.model.User;
 import ru.ndg.market.service.order.OrderService;
 import ru.ndg.market.service.product.ProductService;
 import ru.ndg.market.service.user.UserService;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/")
-public class ProductController {
+public class MainController {
 
     private final ProductService productService;
     private final UserService userService;
@@ -29,7 +30,7 @@ public class ProductController {
     private final Cart cart;
 
     @Autowired
-    public ProductController(ProductService productService, UserService userService, OrderService orderService, Cart cart) {
+    public MainController(ProductService productService, UserService userService, OrderService orderService, Cart cart) {
         this.productService = productService;
         this.userService = userService;
         this.orderService = orderService;
@@ -50,6 +51,17 @@ public class ProductController {
         return "login_page";
     }
 
+    @GetMapping(value = "/sign_up")
+    public String showRegistrationPage() {
+        return "sign_up";
+    }
+
+    @PostMapping(value = "/user/create")
+    public String createNewUser(@ModelAttribute User user) {
+        userService.saveNewUser(user);
+        return "redirect:/login";
+    }
+
     @GetMapping(value = "/edit/{id}")
     public String showEditProductPage(@PathVariable(name = "id") Long id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
@@ -64,7 +76,7 @@ public class ProductController {
 
     @GetMapping(value = "/profile")
     public String showProfilePage(Model model, Principal principal) {
-        model.addAttribute("user", userService.loadByUsername(principal.getName()));
+        model.addAttribute("user", userService.findByUsername(principal.getName()));
         return "profile";
     }
 
@@ -95,13 +107,13 @@ public class ProductController {
     @GetMapping(value = "/orders/confirm")
     public String showConfirmOrderPage(Model model, Principal principal) {
         model.addAttribute("sum", cart.getSum());
-        model.addAttribute("user", userService.loadByUsername(principal.getName()));
+        model.addAttribute("user", userService.findByUsername(principal.getName()));
         return "confirm_order";
     }
 
     @PostMapping(value = "/orders/save")
     public String saveOrder(@RequestParam(name = "address") String address, @RequestParam(name = "phone") String phone, Principal principal) {
-        orderService.saveOrUpdateOrder(new Order(cart, userService.loadByUsername(principal.getName()), address, phone));
+        orderService.saveOrUpdateOrder(new Order(cart, userService.findByUsername(principal.getName()), address, phone));
         return "redirect:/";
     }
 }

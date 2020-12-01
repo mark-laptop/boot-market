@@ -36,7 +36,7 @@
                     <form class="align-middle" th:action="@{/authenticateTheUser}" method="POST">
                         <div class="input-group-prepend">
                             <input id="navLoginField" class="form-control" type="text" th:placeholder="#{nav.login.field}" name="username"
-                                   aria-describedby="inputGroup-sizing-sm"style="margin-left: 10px;">
+                                   aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
                             <input id="navPasswordField" class="form-control" type="password" th:placeholder="#{nav.password}" name="password"
                                    aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
                             <button id="navLoginSubmit" class="btn btn-outline-warning btn-sm" style="margin-left: 10px;" type="submit" th:text="#{nav.login.submit}"></button>
@@ -51,6 +51,10 @@
                         <a class="dropdown-item" th:href="@{/?lang=en}">ENG</a>
                     </div>
                 </div>
+
+                <li sec:authorize="isAnonymous()" class="nav-item" style="margin-left: 10px;">
+                    <a th:href="@{'/sign_up'}" class="btn btn-outline-warning btn-sm" th:text="#{nav.sign.up}"></a>
+                </li>
             </ul>
         </div>
     </nav>

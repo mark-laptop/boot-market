@@ -39,7 +39,7 @@ public class Order {
     private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private Set<OrderItem> orderItems;
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @Column(name = "address")
     private String address;
@@ -72,7 +72,6 @@ public class Order {
     }
 
     private void addOrderItems(Set<OrderItem> cartOrderItems) {
-        this.orderItems = new HashSet<>();
         for (OrderItem cartOrderItem : cartOrderItems) {
             this.orderItems.add(cartOrderItem);
             cartOrderItem.setOrder(this);

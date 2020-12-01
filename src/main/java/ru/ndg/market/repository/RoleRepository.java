@@ -7,4 +7,6 @@ import sun.rmi.runtime.Log;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Log> {
+
+    Role findByName(String name);
 }
