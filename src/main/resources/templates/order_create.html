@@ -17,27 +17,27 @@
 
     <h1 th:text="#{nav.order}"></h1>
 
-        <table class="table table-hover">
-            <thead class="thead-dark">
-            <tr>
-                <th th:text="#{products.name}"></th>
-                <th th:text="#{product.quantity}"></th>
-                <th th:text="#{products.price}"></th>
-                <th th:text="#{products.sum}"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="orderItems : ${cart.orderItems}">
-                <td th:text="${orderItems.product.title}"></td>
-                <td th:text="${orderItems.quantity}"></td>
-                <td th:text="${orderItems.price}"></td>
-                <td th:text="${orderItems.sum}"></td>
-            </tr>
-            </tbody>
-        </table>
-        <span th:text="#{nav.total} + ': ' + ${cart.sum}"></span>
-        <br>
-        <a class="btn btn-primary" th:href="@{/orders/confirm}" th:text="#{order.confirm}"></a>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th th:text="#{products.name}"></th>
+            <th th:text="#{product.quantity}"></th>
+            <th th:text="#{products.price}"></th>
+            <th th:text="#{products.sum}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderItems : ${cart.orderItems}">
+            <td th:text="${orderItems.product.title}"></td>
+            <td th:text="${orderItems.quantity}"></td>
+            <td th:text="${orderItems.price}"></td>
+            <td th:text="${orderItems.sum}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <span th:text="#{nav.total} + ': ' + ${cart.sum}"></span>
+    <br>
+    <a class="btn btn-primary" th:href="@{/orders/confirm}" th:text="#{order.confirm}"></a>
 </div>
 
 </body>

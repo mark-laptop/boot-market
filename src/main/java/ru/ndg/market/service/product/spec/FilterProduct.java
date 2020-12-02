@@ -32,7 +32,8 @@ public class FilterProduct {
                 Double minPrice = Double.parseDouble(minPriceParam);
                 spec = spec.and((Specification<Product>) (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("price"), minPrice));
                 filterOut.append("&min_price=").append(minPrice);
-            } catch (NumberFormatException ignore) {}
+            } catch (NumberFormatException ignore) {
+            }
         }
         String maxPriceParam = params.get("max_price");
         if (maxPriceParam != null && !maxPriceParam.isEmpty()) {
@@ -40,7 +41,8 @@ public class FilterProduct {
                 Double maxPrice = Double.parseDouble(maxPriceParam);
                 spec = spec.and((Specification<Product>) (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("price"), maxPrice));
                 filterOut.append("&max_price=").append(maxPrice);
-            } catch (NumberFormatException ignore) {}
+            } catch (NumberFormatException ignore) {
+            }
         }
 
         params.put("filterOut", filterOut.toString());

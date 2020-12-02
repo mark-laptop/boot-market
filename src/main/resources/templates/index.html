@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8"/>
@@ -21,16 +22,16 @@
     <form th:action="@{/}" method="GET">
         <div class="input-group">
             <input class="form-control" th:value="${param.title_part}" name="title_part" type="text"
-            th:placeholder="#{filters.word}"/>
+                   th:placeholder="#{filters.word}"/>
             <input class="form-control" th:value="${param.min_price}" name="min_price" type="number" step="any"
                    th:placeholder="#{filters.price.min}"/>
             <input class="form-control" th:value="${param.max_price}" name="max_price" type="number" step="any"
                    th:placeholder="#{filters.price.max}"/>
-<!--            <select name="cat_id">-->
-<!--                <option th:text="'Не выбрана'" th:value="null"/>-->
-<!--                <option th:each="c : ${categories}" th:text="${c.title}" th:selected="${param.cat_id != null && c.id.toString() == param.cat_id.toString()}"-->
-<!--                        th:value="${c.id}"/>-->
-<!--            </select>-->
+            <!--            <select name="cat_id">-->
+            <!--                <option th:text="'Не выбрана'" th:value="null"/>-->
+            <!--                <option th:each="c : ${categories}" th:text="${c.title}" th:selected="${param.cat_id != null && c.id.toString() == param.cat_id.toString()}"-->
+            <!--                        th:value="${c.id}"/>-->
+            <!--            </select>-->
         </div>
         <br>
         <button type="submit" th:text="#{filters.apply}" class="btn btn-warning"></button>
@@ -52,13 +53,15 @@
             <td th:text="${product.id}"></td>
             <td>
                 <span style="font-weight: bold" th:text="${product.title}"></span>
-<!--                <br>-->
-<!--                <span th:text="${product.description}"/>-->
+                <!--                <br>-->
+                <!--                <span th:text="${product.description}"/>-->
             </td>
             <td th:text="${product.price}"></td>
             <td>
-                <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" th:href="@{'/edit/' + ${product.id}}" class="btn btn-warning" th:text="#{products.edit}"></a>
-                <a th:href="@{'/cart/add/' + ${product.id}}" class="btn btn-primary" th:text="#{products.addToCart}"></a>
+                <a sec:authorize="hasAnyRole('ADMIN', 'SUPERADMIN')" th:href="@{'/edit/' + ${product.id}}"
+                   class="btn btn-warning" th:text="#{products.edit}"></a>
+                <a th:href="@{'/cart/add/' + ${product.id}}" class="btn btn-primary"
+                   th:text="#{products.addToCart}"></a>
             </td>
         </tr>
         </tbody>
@@ -68,7 +71,8 @@
         <ul class="pagination">
             <li class="page-item">
                 <a class="page-link"
-                   th:href="@{'/?p='+ ${productsPage.previousOrFirstPageable().getPageNumber() + 1} + ${filtersDef}}" th:text="#{paging.prev}"></a>
+                   th:href="@{'/?p='+ ${productsPage.previousOrFirstPageable().getPageNumber() + 1} + ${filtersDef}}"
+                   th:text="#{paging.prev}"></a>
             </li>
             <li class="page-item" th:classappend="${productsPage.getNumber() + 1 == i ? 'active' : ''}"
                 th:each="i : ${#numbers.sequence(1, productsPage.getTotalPages())}">
@@ -76,7 +80,8 @@
             </li>
             <li class="page-item">
                 <a class="page-link"
-                   th:href="@{'/?p='+ ${productsPage.nextOrLastPageable().getPageNumber() + 1} + ${filtersDef}}" th:text="#{paging.next}"></a>
+                   th:href="@{'/?p='+ ${productsPage.nextOrLastPageable().getPageNumber() + 1} + ${filtersDef}}"
+                   th:text="#{paging.next}"></a>
             </li>
         </ul>
     </nav>

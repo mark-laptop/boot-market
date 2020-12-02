@@ -9,9 +9,14 @@ import java.util.Set;
 public interface Cart {
 
     void addProduct(Product product);
+
     void removeProductById(Long id);
+
     void recalculate();
+
     Set<OrderItem> getOrderItems();
+
     BigDecimal getSum();
+
     void clear();
 }
