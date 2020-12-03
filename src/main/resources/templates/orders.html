@@ -58,18 +58,18 @@
             <ul class="pagination">
                 <li class="page-item">
                     <a class="page-link"
-                       th:href="@{'/?p='+ ${ordersPage.previousOrFirstPageable().getPageNumber() + 1}}"
+                       th:href="@{'/orders?p='+ ${ordersPage.previousOrFirstPageable().getPageNumber() + 1}}"
                        th:text="#{paging.prev}"></a>
                     <!--                   th:href="@{'/?p='+ ${ordersPage.previousOrFirstPageable().getPageNumber() + 1} + ${filtersDef}}" th:text="#{paging.prev}"></a>-->
                 </li>
                 <li class="page-item" th:classappend="${ordersPage.getNumber() + 1 == i ? 'active' : ''}"
                     th:each="i : ${#numbers.sequence(1, ordersPage.getTotalPages())}">
-                    <a class="page-link" th:text="${i}" th:href="@{'/?p=' + ${i}}"></a>
+                    <a class="page-link" th:text="${i}" th:href="@{'/orders?p=' + ${i}}"></a>
                     <!--                <a class="page-link" th:text="${i}" th:href="@{'/?p=' + ${i} + ${filtersDef}}"></a>-->
                 </li>
                 <li class="page-item">
                     <a class="page-link"
-                       th:href="@{'/?p='+ ${ordersPage.nextOrLastPageable().getPageNumber() + 1}}"
+                       th:href="@{'/orders?p='+ ${ordersPage.nextOrLastPageable().getPageNumber() + 1}}"
                        th:text="#{paging.next}"></a>
                     <!--                   th:href="@{'/?p='+ ${ordersPage.nextOrLastPageable().getPageNumber() + 1} + ${filtersDef}}" th:text="#{paging.next}"></a>-->
                 </li>
