@@ -3,6 +3,7 @@ package ru.ndg.market.service.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ndg.market.model.Product;
@@ -26,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> getAllProducts(Map<String, String> params, Integer page) {
         if (page == null || page < 0) page = 0;
         else page -= 1;
-        return productRepository.findAll(new FilterProduct(params).getSpecification(), PageRequest.of(page, 5));
+        return productRepository.findAll(new FilterProduct(params).getSpecification(), PageRequest.of(page, 5, Sort.by(Sort.Order.asc("id"))));
     }
 
     @Override
